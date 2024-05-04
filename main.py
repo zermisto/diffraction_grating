@@ -62,16 +62,12 @@ M_right = cv2.moments(right_of_center_dot)
 cx_right = int(M_right['m10'] / M_right['m00'])
 cy_right = int(M_right['m01'] / M_right['m00'])
 
-# draw a line between the left and center dot
+# draw a line between the left and center dot, and the center and right dot
 cv2.line(image, (cx_left, cy_left), (cx_center, cy_center), (255, 0, 0), 2)
-
-# draw a line between the center and right dot
 cv2.line(image, (cx_center, cy_center), (cx_right, cy_right), (255, 0, 0), 2)
 
-# distance of line between center and right dot
+# distance of line between center and right dot, and center and left dot
 distance1 = math.sqrt((cx_center - cx_left)**2 + (cy_center - cy_left)**2)
-
-# distance of line between center and right dot
 distance2 = math.sqrt((cx_center - cx_right)**2 + (cy_center - cy_right)**2)
 
 # Convert the pixel distance to mm using the scale factor
@@ -92,7 +88,7 @@ print(f"Average distance between red dots: {average_distance} mm")
 Part 3: Calculating the wavelength of the light
 '''
 m = 1
-l = 13 # cm
+l = 10 # cm
 # d - 1/ N where N is the number of lines per mm and times it by 0.0254 to convert inches to cm
 d = (1/ 13400) * 0.0254 # cm
 theta = math.degrees(math.atan(average_distance / l))
